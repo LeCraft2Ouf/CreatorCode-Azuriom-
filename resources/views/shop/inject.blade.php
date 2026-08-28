@@ -8,13 +8,35 @@
         background: #3a1c1c !important;
         color: #fecaca !important;
     }
-    .creatorcodes-box {
-        width: 100%;
-        margin: 1.25rem 0 0;
+    .creatorcodes-box-input,
+    [data-creatorcodes-box] .shop-nav-cat input {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+        color: inherit !important;
+        flex: 1 1 auto;
+        min-width: 0;
         padding: 0;
+        font-weight: inherit;
     }
-    .creatorcodes-box .input-group {
-        max-width: 100% !important;
+    [data-creatorcodes-box] .shop-nav-cat input::placeholder {
+        color: inherit;
+        opacity: 0.55;
+    }
+    [data-creatorcodes-box] .shop-nav-cat {
+        cursor: default;
+        width: 100%;
+    }
+    .creatorcodes-icon-btn {
+        background: transparent;
+        border: 0;
+        padding: 0;
+        color: inherit;
+        line-height: 1;
+    }
+    .creatorcodes-icon-btn:disabled {
+        opacity: 0.5;
     }
 </style>
 <div id="creatorcodes-mount" hidden>
@@ -43,68 +65,19 @@
             return;
         }
 
-        function shopSidebar() {
-            var shop = document.getElementById('shop');
-            if (!shop) {
-                return null;
-            }
+        var cat = document.querySelector('#shop .shop-nav-cat');
+        var card = cat && cat.closest('.card');
 
-            var children = shop.children;
-            for (var i = 0; i < children.length; i++) {
-                if (!children[i].classList.contains('shop-content')) {
-                    return children[i];
-                }
-            }
-
-            return shop.querySelector('aside, nav') || shop.firstElementChild;
-        }
-
-        function goalBlock(sidebar) {
-            var progress = sidebar.querySelector('.progress');
-            if (!progress) {
-                var headings = sidebar.querySelectorAll('h6, h5, .fw-bold');
-                for (var i = 0; i < headings.length; i++) {
-                    var text = (headings[i].textContent || '').toLowerCase();
-                    if (text.indexOf('objectif') !== -1 || text.indexOf('goal') !== -1) {
-                        progress = headings[i];
-                        break;
-                    }
-                }
-            }
-
-            if (!progress) {
-                return sidebar.querySelector('.mt-auto');
-            }
-
-            var el = progress;
-            while (el.parentElement && el.parentElement !== sidebar) {
-                var parent = el.parentElement;
-                var parentText = parent.textContent || '';
-                if (/cat[eé]gorie/i.test(parentText) && parent.querySelector('.progress')) {
-                    return el;
-                }
-                el = parent;
-            }
-
-            return el;
-        }
-
-        var sidebar = shopSidebar();
-        var placed = false;
-
-        if (sidebar) {
-            var goal = goalBlock(sidebar);
-            if (goal && goal.parentNode) {
-                goal.parentNode.insertBefore(box, goal);
-                placed = true;
+        if (card && card.parentNode) {
+            if (card.nextSibling) {
+                card.parentNode.insertBefore(box, card.nextSibling);
             } else {
-                sidebar.appendChild(box);
-                placed = true;
+                card.parentNode.appendChild(box);
             }
-        }
-
-        if (!placed) {
-            var fallback = document.querySelector('.card-body') || document.body;
+        } else {
+            var fallback = document.querySelector('#shop .shop-navigation')
+                || document.querySelector('.card-body')
+                || document.body;
             fallback.appendChild(box);
         }
 

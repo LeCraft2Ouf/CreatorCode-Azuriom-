@@ -1,34 +1,25 @@
-<div class="creatorcodes-box" data-creatorcodes-box>
-    <h6 class="fw-bold mb-2">{{ trans('creatorcodes::messages.title') }}</h6>
-    <p class="text-muted small mb-2">{{ trans('creatorcodes::messages.hint') }}</p>
-
+<div class="card mb-3" data-creatorcodes-box>
     @if($creatorCode ?? null)
-        <p class="small mb-2">
-            {{ trans('creatorcodes::messages.current', [
-                'code' => $creatorCode->code,
-                'percent' => $creatorCode->percentage,
-                'name' => $creatorCode->user->name,
-            ]) }}
-        </p>
-        <form action="{{ route('creatorcodes.remove') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                {{ trans('creatorcodes::messages.remove') }}
-            </button>
-        </form>
-    @else
-        <form action="{{ route('creatorcodes.apply') }}" method="POST">
-            @csrf
-            <div class="input-group input-group-sm @error('creator_code') has-validation @enderror">
-                <input type="text" class="form-control @error('creator_code') is-invalid @enderror" name="creator_code"
-                       value="{{ old('creator_code') }}" placeholder="{{ trans('creatorcodes::messages.placeholder') }}"
-                       maxlength="32" required @guest disabled @endguest>
-                <button type="submit" class="btn btn-outline-primary" @guest disabled @endguest>
-                    {{ trans('creatorcodes::messages.apply') }}
+        <div class="btn shop-nav-cat d-flex justify-content-between align-items-center active">
+            <span>{{ $creatorCode->code }} · {{ $creatorCode->percentage }}%</span>
+            <form action="{{ route('creatorcodes.remove') }}" method="POST" class="m-0">
+                @csrf
+                <button type="submit" class="creatorcodes-icon-btn" title="{{ trans('creatorcodes::messages.remove') }}">
+                    <i class="bi bi-x-lg"></i>
                 </button>
-                @error('creator_code')
-                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
+            </form>
+        </div>
+    @else
+        <form action="{{ route('creatorcodes.apply') }}" method="POST" class="m-0">
+            @csrf
+            <div class="btn shop-nav-cat d-flex justify-content-between align-items-center">
+                <input type="text" name="creator_code" value="{{ old('creator_code') }}"
+                       placeholder="{{ trans('creatorcodes::messages.placeholder') }}"
+                       maxlength="32" required autocomplete="off" @guest disabled @endguest
+                       class="@error('creator_code') is-invalid @enderror">
+                <button type="submit" class="creatorcodes-icon-btn" @guest disabled @endguest title="{{ trans('creatorcodes::messages.apply') }}">
+                    <span class="arr"><i class="bi bi-arrow-right"></i></span>
+                </button>
             </div>
         </form>
     @endif
