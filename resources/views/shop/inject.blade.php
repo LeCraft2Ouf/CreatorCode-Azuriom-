@@ -7,11 +7,14 @@
     .alert-danger {
         background: #3a1c1c !important;
         color: #fecaca !important;
-        border-color: #7f1d1d !important;
+    }
+    .creatorcodes-box {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        max-width: 520px;
     }
 </style>
 <div id="creatorcodes-mount" hidden>
-    @include('creatorcodes::shop.box', ['compact' => false])
+    @include('creatorcodes::shop.box')
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -37,10 +40,16 @@
         }
 
         var shop = document.getElementById('shop');
-        var target = (shop && (shop.querySelector('section') || shop))
-            || document.querySelector('.card-body')
-            || document.body;
-        target.insertBefore(box, target.firstChild);
+        var section = shop && shop.querySelector('section');
+        var row = section && section.querySelector('.row');
+        var target = row || section || shop || document.querySelector('.card-body') || document.body;
+
+        if (row && row.parentNode) {
+            row.parentNode.insertBefore(box, row.nextSibling);
+        } else {
+            target.appendChild(box);
+        }
+
         mount.remove();
     });
 </script>

@@ -22,7 +22,6 @@ class LayoutComposer
 
         ViewFacade::startPush('footer-scripts', view('creatorcodes::shop.inject', [
             'creatorCode' => $creatorCode,
-            'compact' => false,
         ])->render());
     }
 }
