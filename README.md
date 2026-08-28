@@ -4,38 +4,18 @@ Azuriom shop plugin: players can enter a creator code when buying site money (ne
 
 Requires the official [Shop](https://market.azuriom.com/resources/1) plugin.
 
+The shop box is injected by the plugin on purchase pages. **Themes are not modified** (including Deluxe).
+
 ## Install
 
-1. Copy this folder to `plugins/creatorcodes` on your Azuriom site.
-2. Admin → Plugins → enable **Creator Codes** (runs migrations).
-3. Grant the `creatorcodes.manage` permission if the admin menu is missing.
-4. Add creators (username, code, percentage, active).
+1. Copy this folder to `plugins/creatorcodes`.
+2. Admin → Plugins → enable **Creator Codes**.
+3. Grant `creatorcodes.manage` if the admin menu is missing.
+4. Add creators (Azuriom username, code, percentage).
 
-The username must match an existing Azuriom account (neos are credited there).
-
-## Shop UI
-
-From the Azuriom root, after enabling the plugin:
+If you previously ran `patch-deluxe.php`, revert theme edits:
 
 ```sh
-php plugins/creatorcodes/tools/patch-deluxe.php
+php plugins/creatorcodes/tools/unpatch-deluxe.php
 php artisan optimize:clear
 ```
-
-This inserts the creator code box on Deluxe offer pages (designs 1 and 2), default shop views, and Paysafecard Manual.
-
-You can also add it manually:
-
-```blade
-@if(plugins()->isEnabled('creatorcodes'))
-    @include('creatorcodes::shop.box')
-@endif
-```
-
-
-## Behaviour
-
-Example: buyer purchases 1000 neos with code `SKYZZ` at 10%.
-
-- Buyer: 1000 neos
-- Creator: +100 neos

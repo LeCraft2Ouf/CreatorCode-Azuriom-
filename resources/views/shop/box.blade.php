@@ -1,4 +1,4 @@
-<div class="card mb-4">
+<div class="card mb-4" data-creatorcodes-box>
     <div class="card-body">
         <h5 class="fw-bold mb-2">{{ trans('creatorcodes::messages.title') }}</h5>
         <p class="text-muted small mb-3">{{ trans('creatorcodes::messages.hint') }}</p>

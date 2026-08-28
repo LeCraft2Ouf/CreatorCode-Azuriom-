@@ -11,7 +11,7 @@ use Azuriom\Plugin\CreatorCodes\Listeners\RewardCreatorOnPaymentPaid;
 use Azuriom\Plugin\CreatorCodes\Models\Creator;
 use Azuriom\Plugin\CreatorCodes\Observers\PaymentObserver;
 use Azuriom\Plugin\CreatorCodes\Observers\UserObserver;
-use Azuriom\Plugin\CreatorCodes\View\Composers\ShopViewComposer;
+use Azuriom\Plugin\CreatorCodes\View\Composers\LayoutComposer;
 use Azuriom\Plugin\Shop\Events\PaymentPaid;
 use Azuriom\Plugin\Shop\Models\Payment;
 use Illuminate\Support\Facades\Event;
@@ -79,12 +79,7 @@ class CreatorCodesServiceProvider extends BasePluginServiceProvider
         Payment::observe(PaymentObserver::class);
         User::observe(UserObserver::class);
 
-        View::composer([
-            'shop::offers.*',
-            'shop::cart.index',
-            'paysafecardmanual::pay',
-            'plugins.shop.*',
-        ], ShopViewComposer::class);
+        View::composer('layouts.app', LayoutComposer::class);
     }
 
     /**
