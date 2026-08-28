@@ -37,21 +37,23 @@
                             <td><code>{{ $creator->code }}</code></td>
                             <td>{{ $creator->percentage }} %</td>
                             <td>
-                                <span class="badge bg-{{ $creator->is_enabled ? 'success' : 'secondary' }}">
-                                    {{ trans('creatorcodes::admin.status.'.($creator->is_enabled ? 'enabled' : 'disabled')) }}
-                                </span>
+                                <form action="{{ route('creatorcodes.admin.toggle', $creator) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <div class="form-check form-switch m-0">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                               onchange="this.form.submit()" @checked($creator->is_enabled)
+                                               aria-label="{{ trans('creatorcodes::admin.fields.status') }}">
+                                        <label class="form-check-label">
+                                            {{ trans('creatorcodes::admin.status.'.($creator->is_enabled ? 'enabled' : 'disabled')) }}
+                                        </label>
+                                    </div>
+                                </form>
                             </td>
                             <td>{{ format_money($creator->rewards_sum_neos_rewarded ?? 0) }}</td>
                             <td>
                                 <a href="{{ route('creatorcodes.admin.edit', $creator) }}" class="btn btn-sm btn-outline-primary" title="{{ trans('messages.actions.edit') }}">
                                     <i class="bi bi-pencil-square"></i> {{ trans('messages.actions.edit') }}
                                 </a>
-                                <form action="{{ route('creatorcodes.admin.toggle', $creator) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button class="btn btn-sm btn-outline-secondary" type="submit">
-                                        {{ $creator->is_enabled ? trans('creatorcodes::admin.status.disabled') : trans('creatorcodes::admin.status.enabled') }}
-                                    </button>
-                                </form>
                                 <a href="{{ route('creatorcodes.admin.destroy', $creator) }}" class="btn btn-sm btn-outline-danger" title="{{ trans('messages.actions.delete') }}" data-confirm="delete">
                                     <i class="bi bi-trash"></i>
                                 </a>

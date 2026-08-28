@@ -23,7 +23,6 @@ class AdminController extends Controller
             'pseudo' => 'required|string|max:32',
             'code' => ['required', 'string', 'max:32', 'alpha_dash', Rule::unique('creatorcodes_creators', 'code')],
             'percentage' => 'required|numeric|min:0.01|max:100',
-            'is_enabled' => 'nullable|boolean',
         ]);
 
         $user = User::whereRaw('LOWER(name) = ?', [strtolower($validated['pseudo'])])->first();
@@ -44,7 +43,7 @@ class AdminController extends Controller
             'user_id' => $user->id,
             'code' => strtoupper($validated['code']),
             'percentage' => $validated['percentage'],
-            'is_enabled' => $request->boolean('is_enabled', true),
+            'is_enabled' => true,
         ]);
 
         return redirect()->route('creatorcodes.admin.index')
@@ -66,7 +65,6 @@ class AdminController extends Controller
             'pseudo' => 'required|string|max:32',
             'code' => ['required', 'string', 'max:32', 'alpha_dash', Rule::unique('creatorcodes_creators', 'code')->ignore($creator->id)],
             'percentage' => 'required|numeric|min:0.01|max:100',
-            'is_enabled' => 'nullable|boolean',
         ]);
 
         $user = User::whereRaw('LOWER(name) = ?', [strtolower($validated['pseudo'])])->first();
@@ -87,7 +85,6 @@ class AdminController extends Controller
             'user_id' => $user->id,
             'code' => strtoupper($validated['code']),
             'percentage' => $validated['percentage'],
-            'is_enabled' => $request->boolean('is_enabled'),
         ]);
 
         return redirect()->route('creatorcodes.admin.index')
