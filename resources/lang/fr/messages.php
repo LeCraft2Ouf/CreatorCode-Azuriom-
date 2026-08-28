@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Code créateur',
-    'placeholder' => 'Ex. SKYZZ',
+    'placeholder' => 'Ex: Molotof_',
     'apply' => 'Appliquer',
     'remove' => 'Retirer',
     'applied' => 'Code créateur appliqué. Le créateur recevra un bonus de neos, sans rien te retirer.',

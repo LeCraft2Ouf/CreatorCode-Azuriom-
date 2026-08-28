@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Creator code',
-    'placeholder' => 'e.g. SKYZZ',
+    'placeholder' => 'Ex: Molotof_',
     'apply' => 'Apply',
     'remove' => 'Remove',
     'applied' => 'Creator code applied. The creator will get bonus neos; yours stay the same.',
