@@ -14,17 +14,15 @@ class LayoutComposer
      */
     public function compose(View $view): void
     {
-        if (! Route::is(['shop.offers.*', 'shop.cart.*', 'paysafecardmanual.*'])) {
+        if (! Route::is(['shop.offers.*', 'paysafecardmanual.*'])) {
             return;
         }
-
-        $compact = Route::is('shop.cart.*');
 
         $creatorCode = app(CreatorCodeManager::class)->current(auth()->user());
 
         ViewFacade::startPush('footer-scripts', view('creatorcodes::shop.inject', [
             'creatorCode' => $creatorCode,
-            'compact' => $compact,
+            'compact' => false,
         ])->render());
     }
 }

@@ -1,5 +1,4 @@
 <style>
-    form[action*="/cart/giftcards"] { display: none !important; }
     .alert-success {
         background: #163528 !important;
         color: #c6f6d5 !important;
@@ -12,7 +11,7 @@
     }
 </style>
 <div id="creatorcodes-mount" hidden>
-    @include('creatorcodes::shop.box', ['compact' => ! empty($compact)])
+    @include('creatorcodes::shop.box', ['compact' => false])
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -37,34 +36,11 @@
             return;
         }
 
-        var addForm = document.querySelector('form[action*="/cart/giftcards/add"]');
-
-        if (addForm && addForm.parentNode) {
-            var parent = addForm.parentNode;
-            var after = addForm.nextElementSibling;
-            var node = addForm.previousElementSibling;
-
-            while (node && node.tagName !== 'HR') {
-                var prev = node.previousElementSibling;
-                node.parentNode.removeChild(node);
-                node = prev;
-            }
-
-            document.querySelectorAll('form[action*="/cart/giftcards"]').forEach(function (form) {
-                if (form.parentNode) {
-                    form.parentNode.removeChild(form);
-                }
-            });
-
-            parent.insertBefore(box, after);
-        } else {
-            var shop = document.getElementById('shop');
-            var target = (shop && (shop.querySelector('section') || shop))
-                || document.querySelector('.card-body')
-                || document.body;
-            target.insertBefore(box, target.firstChild);
-        }
-
+        var shop = document.getElementById('shop');
+        var target = (shop && (shop.querySelector('section') || shop))
+            || document.querySelector('.card-body')
+            || document.body;
+        target.insertBefore(box, target.firstChild);
         mount.remove();
     });
 </script>

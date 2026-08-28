@@ -7,6 +7,7 @@ return [
     'updated' => 'Créateur mis à jour.',
     'deleted' => 'Créateur supprimé.',
     'add' => 'Ajouter un créateur',
+    'edit' => 'Modifier le créateur',
     'fields' => [
         'pseudo' => 'Pseudo',
         'code' => 'Code',

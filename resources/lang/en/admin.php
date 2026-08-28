@@ -10,6 +10,7 @@ return [
     'updated' => 'Creator updated.',
     'deleted' => 'Creator deleted.',
     'add' => 'Add a creator',
+    'edit' => 'Edit creator',
     'fields' => [
         'pseudo' => 'Username',
         'code' => 'Code',
