@@ -18,10 +18,13 @@ class LayoutComposer
             return;
         }
 
+        $compact = Route::is('shop.cart.*');
+
         $creatorCode = app(CreatorCodeManager::class)->current(auth()->user());
 
         ViewFacade::startPush('footer-scripts', view('creatorcodes::shop.inject', [
             'creatorCode' => $creatorCode,
+            'compact' => $compact,
         ])->render());
     }
 }

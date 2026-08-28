@@ -1,6 +1,8 @@
-<div class="card mb-4" data-creatorcodes-box>
+<div @class(['card mb-4' => empty($compact), 'mb-3' => ! empty($compact)]) data-creatorcodes-box>
+    @if(empty($compact))
     <div class="card-body">
-        <h5 class="fw-bold mb-2">{{ trans('creatorcodes::messages.title') }}</h5>
+    @endif
+        <h6 class="fw-bold mb-3">{{ trans('creatorcodes::messages.title') }}{{ ! empty($compact) ? ':' : '' }}</h6>
         <p class="text-muted small mb-3">{{ trans('creatorcodes::messages.hint') }}</p>
 
         @if($creatorCode ?? null)
@@ -20,12 +22,12 @@
         @else
             <form action="{{ route('creatorcodes.apply') }}" method="POST">
                 @csrf
-                <div class="input-group @error('creator_code') has-validation @enderror">
-                    <input type="text" name="creator_code" class="form-control @error('creator_code') is-invalid @enderror"
+                <div class="input-group mb-3 @error('creator_code') has-validation @enderror">
+                    <input type="text" class="form-control @error('creator_code') is-invalid @enderror" name="creator_code"
                            value="{{ old('creator_code') }}" placeholder="{{ trans('creatorcodes::messages.placeholder') }}"
                            maxlength="32" required @guest disabled @endguest>
                     <button type="submit" class="btn btn-primary" @guest disabled @endguest>
-                        {{ trans('creatorcodes::messages.apply') }}
+                        <i class="bi bi-plus-lg"></i> {{ trans('creatorcodes::messages.apply') }}
                     </button>
                     @error('creator_code')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -33,5 +35,7 @@
                 </div>
             </form>
         @endif
+    @if(empty($compact))
     </div>
+    @endif
 </div>
