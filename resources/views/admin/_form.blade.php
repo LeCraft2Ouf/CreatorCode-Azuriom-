@@ -8,7 +8,6 @@
         @error('pseudo')
         <span class="invalid-feedback">{{ $message }}</span>
         @enderror
-        <div class="form-text">{{ trans('creatorcodes::admin.help.pseudo') }}</div>
     </div>
     <div class="col-md-3">
         <label class="form-label" for="code">{{ trans('creatorcodes::admin.fields.code') }}</label>
@@ -30,7 +29,8 @@
         </div>
     </div>
     <div class="col-md-2">
-        <div class="form-check">
+        <label class="form-label d-none d-md-block">&nbsp;</label>
+        <div class="form-check d-flex align-items-center mb-0" style="min-height: 38px;">
             <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" value="1"
                    @checked(old('is_enabled', $creator->is_enabled ?? true))>
             <label class="form-check-label" for="is_enabled">
@@ -39,6 +39,7 @@
         </div>
     </div>
     <div class="col-md-2">
+        <label class="form-label d-none d-md-block">&nbsp;</label>
         <button type="submit" class="btn btn-primary w-100">
             @if($creator->exists)
                 <i class="bi bi-save"></i> {{ trans('messages.actions.save') }}
@@ -48,4 +49,5 @@
         </button>
     </div>
 </div>
-<p class="text-muted small mt-3 mb-0">{{ trans('creatorcodes::admin.help.percentage') }}</p>
+<p class="text-muted small mt-3 mb-1">{{ trans('creatorcodes::admin.help.pseudo') }}</p>
+<p class="text-muted small mb-0">{{ trans('creatorcodes::admin.help.percentage') }}</p>
