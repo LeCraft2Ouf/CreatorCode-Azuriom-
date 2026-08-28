@@ -123,16 +123,22 @@ class CreatorCodeManager
             return;
         }
 
+        $creator->loadMissing('user');
+
+        if ($creator->user === null) {
+            return;
+        }
+
         $neosBought = $this->neosBought($payment);
 
         if ($neosBought <= 0) {
             return;
         }
 
-        $percentage = $link->percentage ?? $creator->percentage;
-        $rewarded = round($neosBought * ((float) $percentage / 100), 2);
+        $percentage = (float) ($link->percentage ?? $creator->percentage);
+        $rewarded = (int) round($neosBought * ($percentage / 100), 0, PHP_ROUND_HALF_UP);
 
-        if ($rewarded <= 0) {
+        if ($rewarded < 1) {
             return;
         }
 
@@ -181,6 +187,8 @@ class CreatorCodeManager
 
     private function neosBought(Payment $payment): float
     {
+        $payment->loadMissing('items.buyable', 'user');
+
         $neos = 0.0;
 
         foreach ($payment->items as $item) {

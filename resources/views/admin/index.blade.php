@@ -49,7 +49,7 @@
                                     </div>
                                 </form>
                             </td>
-                            <td>{{ format_money($creator->rewards_sum_neos_rewarded ?? 0) }}</td>
+                            <td>{{ format_money((int) round($creator->rewards_sum_neos_rewarded ?? 0)) }}</td>
                             <td>
                                 <a href="{{ route('creatorcodes.admin.edit', $creator) }}" class="btn btn-sm btn-outline-primary" title="{{ trans('messages.actions.edit') }}">
                                     <i class="bi bi-pencil-square"></i> {{ trans('messages.actions.edit') }}
