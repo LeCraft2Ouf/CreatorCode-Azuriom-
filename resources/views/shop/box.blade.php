@@ -5,7 +5,7 @@
     <div class="card mb-3">
         @if($creatorCode ?? null)
             <div class="btn shop-nav-cat d-flex justify-content-between align-items-center active">
-                <span>{{ $creatorCode->code }} · {{ $creatorCode->percentage }}%</span>
+                <span>{{ $creatorCode->code }}</span>
                 <form action="{{ route('creatorcodes.remove') }}" method="POST" class="m-0">
                     @csrf
                     <button type="submit" class="creatorcodes-icon-btn" title="{{ trans('creatorcodes::messages.remove') }}">
