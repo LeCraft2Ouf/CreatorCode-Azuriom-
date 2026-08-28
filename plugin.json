@@ -1,0 +1,18 @@
+{
+    "id": "creatorcodes",
+    "name": "Creator Codes",
+    "description": "Let players enter a creator code when buying site money. The creator receives a bonus percentage on top; the buyer keeps the full amount.",
+    "version": "1.0.0",
+    "url": "https://github.com/LeCraft2Ouf/CreatorCode-Azuriom-",
+    "authors": [
+        "Neodium"
+    ],
+    "azuriom_api": "1.2.0",
+    "dependencies": {
+        "shop": "^1.0.0"
+    },
+    "providers": [
+        "\\Azuriom\\Plugin\\CreatorCodes\\Providers\\CreatorCodesServiceProvider",
+        "\\Azuriom\\Plugin\\CreatorCodes\\Providers\\RouteServiceProvider"
+    ]
+}
