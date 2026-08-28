@@ -28,6 +28,13 @@
         cursor: default;
         width: 100%;
     }
+    [data-creatorcodes-box] .shop-nav-cat.creatorcodes-invalid {
+        box-shadow: inset 0 0 0 1px #f87171;
+    }
+    .creatorcodes-error {
+        color: #fca5a5;
+        font-size: 0.8rem;
+    }
     .creatorcodes-icon-btn {
         background: transparent;
         border: 0;

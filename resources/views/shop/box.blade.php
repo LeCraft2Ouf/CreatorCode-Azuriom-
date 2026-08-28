@@ -16,11 +16,10 @@
         @else
             <form action="{{ route('creatorcodes.apply') }}" method="POST" class="m-0">
                 @csrf
-                <div class="btn shop-nav-cat d-flex justify-content-between align-items-center">
+                <div class="btn shop-nav-cat d-flex justify-content-between align-items-center @error('creator_code') creatorcodes-invalid @enderror">
                     <input type="text" name="creator_code" value="{{ old('creator_code') }}"
                            placeholder="{{ trans('creatorcodes::messages.placeholder') }}"
-                           maxlength="32" required autocomplete="off" @guest disabled @endguest
-                           class="@error('creator_code') is-invalid @enderror">
+                           maxlength="32" required autocomplete="off" @guest disabled @endguest>
                     <button type="submit" class="creatorcodes-icon-btn" @guest disabled @endguest title="{{ trans('creatorcodes::messages.apply') }}">
                         <span class="arr"><i class="bi bi-arrow-right"></i></span>
                     </button>
@@ -28,4 +27,7 @@
             </form>
         @endif
     </div>
+    @error('creator_code')
+        <p class="creatorcodes-error mb-3 mt-0">{{ $message }}</p>
+    @enderror
 </div>
