@@ -67,7 +67,7 @@ class CreatorCodeManager
             return null;
         }
 
-        return Creator::enabled()->with('user')->find($binding->creator_id);
+        return Creator::enabled()->find($binding->creator_id);
     }
 
     public function attachToPayment(Payment $payment): void

@@ -3,9 +3,9 @@
         {{ trans('creatorcodes::messages.title') }}
     </h6>
     <div class="card mb-3">
-        @if($creatorCode ?? null)
+        @if(! empty($appliedCode))
             <div class="btn shop-nav-cat d-flex justify-content-between align-items-center active">
-                <span>{{ $creatorCode->code }}</span>
+                <span>{{ $appliedCode }}</span>
                 <form action="{{ route('creatorcodes.remove') }}" method="POST" class="m-0">
                     @csrf
                     <button type="submit" class="creatorcodes-icon-btn" title="{{ trans('creatorcodes::messages.remove') }}">

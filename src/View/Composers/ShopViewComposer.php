@@ -9,6 +9,6 @@ class ShopViewComposer
 {
     public function compose(View $view): void
     {
-        $view->with('creatorCode', app(CreatorCodeManager::class)->current(auth()->user()));
+        $view->with('appliedCode', app(CreatorCodeManager::class)->current(auth()->user())?->code);
     }
 }

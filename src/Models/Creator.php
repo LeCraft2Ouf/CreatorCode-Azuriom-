@@ -47,6 +47,15 @@ class Creator extends Model
         'is_enabled' => 'boolean',
     ];
 
+    /**
+     * Hide commission from accidental JSON / HTML dumps.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'percentage',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -65,7 +74,6 @@ class Creator extends Model
     public static function findByCode(string $code): ?self
     {
         return static::enabled()
-            ->with('user')
             ->whereRaw('UPPER(code) = ?', [strtoupper(trim($code))])
             ->first();
     }

@@ -21,7 +21,7 @@ class LayoutComposer
         $creatorCode = app(CreatorCodeManager::class)->current(auth()->user());
 
         ViewFacade::startPush('footer-scripts', view('creatorcodes::shop.inject', [
-            'creatorCode' => $creatorCode,
+            'appliedCode' => $creatorCode?->code,
         ])->render());
     }
 }
