@@ -11,6 +11,7 @@ return [
     'hint' => 'Le créateur reçoit un % de tes neos achetés. Tes neos restent identiques.',
     'errors' => [
         'invalid' => 'Code créateur invalide ou inactif.',
+        'too_many' => 'Trop d’essais. Réessaie dans une minute.',
     ],
     'notification' => 'Tu as reçu :amount grâce au code :code (achat de :buyer).',
 ];

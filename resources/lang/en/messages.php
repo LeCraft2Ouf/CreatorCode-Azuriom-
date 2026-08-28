@@ -11,6 +11,7 @@ return [
     'hint' => 'The creator gets a % of the neos you buy. Your neos are unchanged.',
     'errors' => [
         'invalid' => 'Invalid or inactive creator code.',
+        'too_many' => 'Too many attempts. Try again in a minute.',
     ],
     'notification' => 'You received :amount from code :code (purchase by :buyer).',
 ];
