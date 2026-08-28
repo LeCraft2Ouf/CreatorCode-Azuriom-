@@ -52,14 +52,9 @@
                                         {{ $creator->is_enabled ? trans('creatorcodes::admin.status.disabled') : trans('creatorcodes::admin.status.enabled') }}
                                     </button>
                                 </form>
-                                <form action="{{ route('creatorcodes.admin.destroy', $creator) }}" method="POST" class="d-inline"
-                                      data-confirm="delete">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-outline-danger" type="submit" title="{{ trans('messages.actions.delete') }}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
+                                <a href="{{ route('creatorcodes.admin.destroy', $creator) }}" class="btn btn-sm btn-outline-danger" title="{{ trans('messages.actions.delete') }}" data-confirm="delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty
