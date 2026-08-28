@@ -43,7 +43,7 @@ class AdminController extends Controller
             'user_id' => $user->id,
             'code' => strtoupper($validated['code']),
             'percentage' => $validated['percentage'],
-            'is_enabled' => true,
+            'is_enabled' => $request->boolean('is_enabled'),
         ]);
 
         return redirect()->route('creatorcodes.admin.index')
@@ -85,6 +85,7 @@ class AdminController extends Controller
             'user_id' => $user->id,
             'code' => strtoupper($validated['code']),
             'percentage' => $validated['percentage'],
+            'is_enabled' => $request->boolean('is_enabled'),
         ]);
 
         return redirect()->route('creatorcodes.admin.index')

@@ -1,7 +1,7 @@
 @csrf
 
 <div class="row g-3 align-items-end">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <label class="form-label" for="pseudo">{{ trans('creatorcodes::admin.fields.pseudo') }}</label>
         <input type="text" id="pseudo" name="pseudo" class="form-control @error('pseudo') is-invalid @enderror"
                value="{{ old('pseudo', $creator->user?->name ?? '') }}" required>
@@ -17,7 +17,7 @@
         <span class="invalid-feedback">{{ $message }}</span>
         @enderror
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label class="form-label" for="percentage">{{ trans('creatorcodes::admin.fields.percentage') }}</label>
         <div class="input-group">
             <input type="number" id="percentage" name="percentage" class="form-control @error('percentage') is-invalid @enderror"
@@ -26,6 +26,19 @@
             @error('percentage')
             <span class="invalid-feedback">{{ $message }}</span>
             @enderror
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="is_enabled">{{ trans('creatorcodes::admin.fields.status') }}</label>
+        <div class="d-flex align-items-center" style="min-height: 38px;">
+            <span class="text-muted small me-2">Off</span>
+            <div class="form-check form-switch m-0">
+                <input type="hidden" name="is_enabled" value="0">
+                <input class="form-check-input" type="checkbox" role="switch" id="is_enabled" name="is_enabled" value="1"
+                       style="width: 2.8em; height: 1.45em; cursor: pointer; margin-left: 0;"
+                       @checked(old('is_enabled', $creator->is_enabled ?? true))>
+            </div>
+            <span class="small ms-2">On</span>
         </div>
     </div>
     <div class="col-md-2">
