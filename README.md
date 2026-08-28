@@ -15,7 +15,16 @@ The username must match an existing Azuriom account (neos are credited there).
 
 ## Shop UI
 
-Add this on the site-money purchase pages (gateway / offer selection), for example in your theme:
+From the Azuriom root, after enabling the plugin:
+
+```sh
+php plugins/creatorcodes/tools/patch-deluxe.php
+php artisan optimize:clear
+```
+
+This inserts the creator code box on Deluxe offer pages (designs 1 and 2), default shop views, and Paysafecard Manual.
+
+You can also add it manually:
 
 ```blade
 @if(plugins()->isEnabled('creatorcodes'))
@@ -23,14 +32,6 @@ Add this on the site-money purchase pages (gateway / offer selection), for examp
 @endif
 ```
 
-Deluxe theme files already patched on Neodium:
-
-- `resources/themes/deluxe/views/plugins/shop/designs/1/offers/payment.blade.php`
-- `resources/themes/deluxe/views/plugins/shop/designs/1/offers/select.blade.php`
-- `resources/themes/deluxe/views/plugins/shop/designs/2/offers/payment.blade.php`
-- `resources/themes/deluxe/views/plugins/shop/designs/2/offers/select.blade.php`
-
-Paysafecard manual pay view can include the same box.
 
 ## Behaviour
 
