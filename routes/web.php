@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::post('/apply', [CreatorCodeController::class, 'apply'])->name('apply');
-    Route::post('/remove', [CreatorCodeController::class, 'remove'])->name('remove');
+    Route::post('/apply', [CreatorCodeController::class, 'apply'])
+        ->middleware('throttle:5,1')
+        ->name('apply');
+    Route::post('/remove', [CreatorCodeController::class, 'remove'])
+        ->middleware('throttle:20,1')
+        ->name('remove');
 });

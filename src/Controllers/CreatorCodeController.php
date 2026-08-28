@@ -11,18 +11,18 @@ class CreatorCodeController extends Controller
     public function apply(Request $request, CreatorCodeManager $manager)
     {
         $validated = $this->validate($request, [
-            'creator_code' => 'required|string|max:32',
+            'creator_code' => ['required', 'string', 'max:32', 'regex:/^[A-Za-z0-9_-]+$/'],
         ]);
 
         $manager->apply($validated['creator_code'], $request->user());
 
-        return back()->with('success', trans('creatorcodes::messages.applied'));
+        return back();
     }
 
     public function remove(Request $request, CreatorCodeManager $manager)
     {
         $manager->remove($request->user());
 
-        return back()->with('success', trans('creatorcodes::messages.removed'));
+        return back();
     }
 }

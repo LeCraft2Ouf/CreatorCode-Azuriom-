@@ -1,5 +1,15 @@
 <style>
     form[action*="/cart/giftcards"] { display: none !important; }
+    .alert-success {
+        background: #163528 !important;
+        color: #c6f6d5 !important;
+        border-color: #2f6f4e !important;
+    }
+    .alert-danger {
+        background: #3a1c1c !important;
+        color: #fecaca !important;
+        border-color: #7f1d1d !important;
+    }
 </style>
 <div id="creatorcodes-mount" hidden>
     @include('creatorcodes::shop.box', ['compact' => ! empty($compact)])
