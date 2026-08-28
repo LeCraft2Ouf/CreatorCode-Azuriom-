@@ -98,6 +98,12 @@ class CreatorCodeManager
 
     public function rewardPayment(Payment $payment): void
     {
+        $payment->refresh();
+
+        if (! $payment->isCompleted() || $payment->isWithSiteMoney()) {
+            return;
+        }
+
         if ($payment->id !== null && Reward::where('payment_id', $payment->id)->exists()) {
             return;
         }
