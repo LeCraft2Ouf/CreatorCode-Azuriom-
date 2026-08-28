@@ -29,14 +29,12 @@
         </div>
     </div>
     <div class="col-md-2">
-        <label class="form-label d-none d-md-block">&nbsp;</label>
-        <div class="form-check d-flex align-items-center mb-0" style="min-height: 38px;">
-            <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" value="1"
-                   @checked(old('is_enabled', $creator->is_enabled ?? true))>
-            <label class="form-check-label" for="is_enabled">
-                {{ trans('creatorcodes::admin.status.enabled') }}
-            </label>
-        </div>
+        <label class="form-label" for="is_enabled">{{ trans('creatorcodes::admin.fields.status') }}</label>
+        <input type="checkbox" class="btn-check" name="is_enabled" id="is_enabled" value="1" autocomplete="off"
+               @checked(old('is_enabled', $creator->is_enabled ?? true))>
+        <label class="btn btn-outline-success w-100" for="is_enabled">
+            {{ trans('creatorcodes::admin.status.enabled') }}
+        </label>
     </div>
     <div class="col-md-2">
         <label class="form-label d-none d-md-block">&nbsp;</label>
