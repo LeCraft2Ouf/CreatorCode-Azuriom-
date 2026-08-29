@@ -11,6 +11,22 @@
         reference.parentNode.insertBefore(node, reference.nextSibling);
     }
 
+    function firstPageCard(root) {
+        var cards = root.querySelectorAll('.card');
+        var i;
+        var card;
+
+        for (i = 0; i < cards.length; i++) {
+            card = cards[i];
+
+            if (!card.closest('[data-creatorcodes-box]')) {
+                return card;
+            }
+        }
+
+        return null;
+    }
+
     function mount(box) {
         var deluxeCat = document.querySelector('#shop .shop-nav-cat');
         var deluxeCard = deluxeCat && deluxeCat.closest('.card');
@@ -20,18 +36,17 @@
             return;
         }
 
-        var shopRoot = document.querySelector('#shop');
-        var content = shopRoot
+        var content = document.querySelector('#shop')
             || document.querySelector('.container.content')
             || document.querySelector('main .container')
             || document.querySelector('.container')
             || document.querySelector('main')
             || document.body;
 
-        var heading = content.querySelector('h1, h2');
+        var paymentCard = firstPageCard(content);
 
-        if (heading) {
-            insertAfter(heading, box);
+        if (paymentCard && paymentCard.parentNode) {
+            paymentCard.parentNode.insertBefore(box, paymentCard);
             return;
         }
 
