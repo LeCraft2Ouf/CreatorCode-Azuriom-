@@ -11,20 +11,43 @@
         reference.parentNode.insertBefore(node, reference.nextSibling);
     }
 
-    function firstPageCard(root) {
-        var cards = root.querySelectorAll('.card');
+    function firstCardBody(root) {
+        var bodies = root.querySelectorAll('.card-body');
         var i;
-        var card;
+        var body;
 
-        for (i = 0; i < cards.length; i++) {
-            card = cards[i];
+        for (i = 0; i < bodies.length; i++) {
+            body = bodies[i];
 
-            if (!card.closest('[data-creatorcodes-box]')) {
-                return card;
+            if (!body.closest('[data-creatorcodes-box]')) {
+                return body;
             }
         }
 
         return null;
+    }
+
+    function wrapAsCard(box) {
+        var card = document.createElement('div');
+        var header = document.createElement('div');
+        var inner = document.createElement('div');
+        var title = box.querySelector('.fw-bold');
+
+        card.className = 'card mb-4';
+        header.className = 'card-header';
+        inner.className = 'card-body';
+
+        if (title) {
+            header.textContent = title.textContent;
+            title.remove();
+        }
+
+        box.classList.remove('creatorcodes-inline', 'mb-4', 'pb-4');
+        inner.appendChild(box);
+        card.appendChild(header);
+        card.appendChild(inner);
+
+        return card;
     }
 
     function mount(box) {
@@ -32,7 +55,7 @@
         var deluxeCard = deluxeCat && deluxeCat.closest('.card');
 
         if (deluxeCard && deluxeCard.parentNode) {
-            insertAfter(deluxeCard, box);
+            insertAfter(deluxeCard, wrapAsCard(box));
             return;
         }
 
@@ -43,14 +66,14 @@
             || document.querySelector('main')
             || document.body;
 
-        var paymentCard = firstPageCard(content);
+        var cardBody = firstCardBody(content);
 
-        if (paymentCard && paymentCard.parentNode) {
-            paymentCard.parentNode.insertBefore(box, paymentCard);
+        if (cardBody) {
+            cardBody.insertBefore(box, cardBody.firstChild);
             return;
         }
 
-        content.insertBefore(box, content.firstChild);
+        content.insertBefore(wrapAsCard(box), content.firstChild);
     }
 
     ready(function () {
