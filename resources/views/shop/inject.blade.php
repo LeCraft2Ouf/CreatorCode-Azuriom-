@@ -1,9 +1,9 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ plugin_asset('creatorcodes', 'css/creatorcodes.css') }}">
+    <link rel="stylesheet" href="{{ plugin_asset('creatorcodes', 'css/creatorcodes.css') }}?v=1.0.1">
 @endpush
 
 @push('scripts')
-    <script src="{{ plugin_asset('creatorcodes', 'js/creatorcodes.js') }}" defer></script>
+    <script src="{{ plugin_asset('creatorcodes', 'js/creatorcodes.js') }}?v=1.0.1" defer></script>
 @endpush
 
 @push('footer-scripts')

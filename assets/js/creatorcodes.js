@@ -11,20 +11,8 @@
         reference.parentNode.insertBefore(node, reference.nextSibling);
     }
 
-    function firstCardBody(root) {
-        var bodies = root.querySelectorAll('.card-body');
-        var i;
-        var body;
-
-        for (i = 0; i < bodies.length; i++) {
-            body = bodies[i];
-
-            if (!body.closest('[data-creatorcodes-box]')) {
-                return body;
-            }
-        }
-
-        return null;
+    function isPaysafecardPage() {
+        return /paysafecard/i.test(window.location.pathname);
     }
 
     function wrapAsCard(box) {
@@ -50,7 +38,68 @@
         return card;
     }
 
+    function findPaymentCard() {
+        var cards = document.querySelectorAll('.card');
+        var i;
+        var card;
+        var header;
+        var form;
+
+        for (i = 0; i < cards.length; i++) {
+            card = cards[i];
+
+            if (card.querySelector('[data-creatorcodes-box]')) {
+                continue;
+            }
+
+            header = card.querySelector('.card-header');
+
+            if (header && /paysafecard/i.test(header.textContent)) {
+                return card;
+            }
+        }
+
+        for (i = 0; i < cards.length; i++) {
+            card = cards[i];
+            form = card.querySelector('form');
+
+            if (form && !form.querySelector('[name="creator_code"]')) {
+                return card;
+            }
+        }
+
+        return null;
+    }
+
+    function insertIntoCard(card, box) {
+        var body = card.querySelector('.card-body');
+        var header = card.querySelector('.card-header');
+
+        if (body) {
+            body.insertBefore(box, body.firstChild);
+            return;
+        }
+
+        if (header) {
+            insertAfter(header, box);
+            return;
+        }
+
+        card.insertBefore(box, card.firstChild);
+    }
+
     function mount(box) {
+        var paymentCard;
+
+        if (isPaysafecardPage()) {
+            paymentCard = findPaymentCard();
+
+            if (paymentCard) {
+                insertIntoCard(paymentCard, box);
+                return;
+            }
+        }
+
         var deluxeCat = document.querySelector('#shop .shop-nav-cat');
         var deluxeCard = deluxeCat && deluxeCat.closest('.card');
 
@@ -66,10 +115,10 @@
             || document.querySelector('main')
             || document.body;
 
-        var cardBody = firstCardBody(content);
+        paymentCard = findPaymentCard();
 
-        if (cardBody) {
-            cardBody.insertBefore(box, cardBody.firstChild);
+        if (paymentCard) {
+            insertIntoCard(paymentCard, box);
             return;
         }
 
