@@ -4,7 +4,6 @@ namespace Azuriom\Plugin\CreatorCodes\View\Composers;
 
 use Azuriom\Plugin\CreatorCodes\CreatorCodeManager;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\View\View;
 
 class LayoutComposer
@@ -14,14 +13,20 @@ class LayoutComposer
      */
     public function compose(View $view): void
     {
+        if (app()->bound('creatorcodes.layout_injected')) {
+            return;
+        }
+
         if (! Route::is(['shop.offers.*', 'paysafecardmanual.*'])) {
             return;
         }
 
+        app()->instance('creatorcodes.layout_injected', true);
+
         $creatorCode = app(CreatorCodeManager::class)->current(auth()->user());
 
-        ViewFacade::startPush('footer-scripts', view('creatorcodes::shop.inject', [
+        view('creatorcodes::shop.inject', [
             'appliedCode' => $creatorCode?->code,
-        ])->render());
+        ])->render();
     }
 }

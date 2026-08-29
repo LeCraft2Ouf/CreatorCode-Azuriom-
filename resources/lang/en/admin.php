@@ -16,7 +16,7 @@ return [
         'code' => 'Code',
         'percentage' => 'Percentage',
         'status' => 'Status',
-        'neos' => 'Neos paid',
+        'paid' => 'Paid',
     ],
     'status' => [
         'enabled' => 'Active',
@@ -25,7 +25,7 @@ return [
     'help' => [
         'pseudo' => 'Must match the creator Azuriom account.',
         'code' => 'Code entered by the player in the shop.',
-        'percentage' => 'The creator receives this % of purchased neos, extra. Nothing is taken from the buyer.',
+        'percentage' => 'The creator receives this % of purchased :money, extra. Nothing is taken from the buyer.',
     ],
     'errors' => [
         'user' => 'No Azuriom account with this username.',

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register admin routes for your plugin. These
 | routes are loaded by the RouteServiceProvider of your plugin within
-| a group that contains the "web" and "admin" middleware groups.
+| a group that contains the "admin-access" middleware group.
 |
 */
 

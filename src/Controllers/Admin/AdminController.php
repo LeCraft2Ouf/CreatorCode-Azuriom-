@@ -14,6 +14,7 @@ class AdminController extends Controller
     {
         return view('creatorcodes::admin.index', [
             'creators' => Creator::with('user')->withSum('rewards', 'neos_rewarded')->orderBy('code')->get(),
+            'creator' => new Creator(['is_enabled' => true, 'percentage' => 10]),
         ]);
     }
 

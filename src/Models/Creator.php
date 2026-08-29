@@ -25,8 +25,10 @@ class Creator extends Model
 
     /**
      * The table prefix associated with the model.
+     *
+     * @var string
      */
-    protected string $prefix = 'creatorcodes_';
+    protected $prefix = 'creatorcodes_';
 
     /**
      * The attributes that are mass assignable.

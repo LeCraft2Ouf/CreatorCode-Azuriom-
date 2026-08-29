@@ -46,6 +46,8 @@ class CreatorCodesServiceProvider extends BasePluginServiceProvider
      */
     public function register(): void
     {
+        $this->registerMiddlewares();
+
         $this->app->singleton(CreatorCodeManager::class);
     }
 
@@ -64,8 +66,6 @@ class CreatorCodesServiceProvider extends BasePluginServiceProvider
 
         $this->registerAdminNavigation();
 
-        $this->registerUserNavigation();
-
         Permission::registerPermissions([
             'creatorcodes.manage' => 'creatorcodes::admin.permissions.manage',
         ]);
@@ -74,9 +74,14 @@ class CreatorCodesServiceProvider extends BasePluginServiceProvider
             Creator::class,
         ], 'creatorcodes::admin.logs');
 
-        Event::listen(PaymentPaid::class, RewardCreatorOnPaymentPaid::class);
+        if (class_exists(PaymentPaid::class)) {
+            Event::listen(PaymentPaid::class, RewardCreatorOnPaymentPaid::class);
+        }
 
-        Payment::observe(PaymentObserver::class);
+        if (class_exists(Payment::class)) {
+            Payment::observe(PaymentObserver::class);
+        }
+
         User::observe(UserObserver::class);
 
         View::composer('layouts.app', LayoutComposer::class);
@@ -107,15 +112,5 @@ class CreatorCodesServiceProvider extends BasePluginServiceProvider
                 'permission' => 'creatorcodes.manage',
             ],
         ];
-    }
-
-    /**
-     * Return the user navigations routes to register in the user menu.
-     *
-     * @return array<string, array<string, string>>
-     */
-    protected function userNavigation(): array
-    {
-        return [];
     }
 }

@@ -27,14 +27,16 @@ class CreatorCodeController extends Controller
 
         $manager->apply($validated['creator_code'], $request->user());
 
-        return back();
+        return back()->with('success', trans('creatorcodes::messages.applied', [
+            'money' => money_name(),
+        ]));
     }
 
     public function remove(Request $request, CreatorCodeManager $manager)
     {
         $manager->remove($request->user());
 
-        return back();
+        return back()->with('success', trans('creatorcodes::messages.removed'));
     }
 
     private function ensureIsNotRateLimited(Request $request): void

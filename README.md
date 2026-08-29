@@ -1,21 +1,24 @@
 # Creator Codes for Azuriom
 
-Azuriom shop plugin: players can enter a creator code when buying site money (neos). The creator receives a bonus percentage **on top**. Nothing is deducted from the buyer.
+Plugin for the official [Shop](https://market.azuriom.com/resources/1) plugin. Players can enter a creator code when buying site money. The creator receives a bonus percentage **on top**. Nothing is deducted from the buyer.
 
-Requires the official [Shop](https://market.azuriom.com/resources/1) plugin.
+Built according to the [Azuriom plugin documentation](https://azuriom.com/en/docs/plugins): Bootstrap 5 markup, Blade stacks (`styles`, `scripts` with `defer`, `footer-scripts`), `plugin_asset()`, and **no theme or Shop view edits**.
 
-The shop box is injected by the plugin on purchase pages. **Themes are not modified** (including Deluxe).
+## Requirements
+
+- Azuriom 1.2+ (`azuriom_api`: 1.2.0)
+- Shop plugin (`dependencies.shop`)
 
 ## Install
 
-1. Copy this folder to `plugins/creatorcodes`.
-2. Admin → Plugins → enable **Creator Codes**.
-3. Grant `creatorcodes.manage` if the admin menu is missing.
-4. Add creators (Azuriom username, code, percentage).
+1. The ZIP **must** have `plugin.json` at the root.
+2. Extract to `plugins/creatorcodes` (folder name = plugin id).
+3. Admin → Plugins → enable **Creator Codes**.
+4. Grant `creatorcodes.manage` if the admin menu is missing.
+5. Add creators (Azuriom username, code, percentage).
 
-If you previously ran `patch-deluxe.php`, revert theme edits:
+If you previously patched Shop or theme Blade files with `@include('creatorcodes::shop.box')`, remove those includes and run `php artisan optimize:clear`.
 
-```sh
-php plugins/creatorcodes/tools/unpatch-deluxe.php
-php artisan optimize:clear
-```
+## License
+
+Apache License 2.0

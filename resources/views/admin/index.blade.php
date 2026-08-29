@@ -5,11 +5,11 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h6 class="m-0 font-weight-bold">{{ trans('creatorcodes::admin.add') }}</h6>
+            <h6 class="m-0 fw-bold">{{ trans('creatorcodes::admin.add') }}</h6>
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('creatorcodes.admin.store') }}">
-                @include('creatorcodes::admin._form', ['creator' => new \Azuriom\Plugin\CreatorCodes\Models\Creator(['is_enabled' => true, 'percentage' => 10])])
+                @include('creatorcodes::admin._form')
             </form>
         </div>
     </div>
@@ -24,7 +24,7 @@
                         <th>{{ trans('creatorcodes::admin.fields.code') }}</th>
                         <th>{{ trans('creatorcodes::admin.fields.percentage') }}</th>
                         <th>{{ trans('creatorcodes::admin.fields.status') }}</th>
-                        <th>{{ trans('creatorcodes::admin.fields.neos') }}</th>
+                        <th>{{ trans('creatorcodes::admin.fields.paid') }}</th>
                         <th>{{ trans('messages.fields.action') }}</th>
                     </tr>
                     </thead>
