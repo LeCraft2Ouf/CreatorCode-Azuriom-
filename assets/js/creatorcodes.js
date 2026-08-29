@@ -19,7 +19,7 @@
         var card = document.createElement('div');
         var header = document.createElement('div');
         var inner = document.createElement('div');
-        var title = box.querySelector('.fw-bold');
+        var title = box.querySelector('[data-creatorcodes-title]');
 
         card.className = 'card mb-4';
         header.className = 'card-header';

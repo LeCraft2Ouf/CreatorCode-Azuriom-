@@ -9,6 +9,7 @@ return [
     'removed' => 'Code créateur retiré.',
     'current' => 'Code actif : :code',
     'hint' => 'Le créateur reçoit un pourcentage des :money que tu achètes. Ton montant reste identique.',
+    'optional' => 'facultatif',
     'login' => 'Connecte-toi pour saisir un code créateur.',
     'errors' => [
         'invalid' => 'Code créateur invalide ou inactif.',

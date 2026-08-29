@@ -9,6 +9,7 @@ return [
     'removed' => 'Creator code removed.',
     'current' => 'Active code: :code',
     'hint' => 'The creator receives a percentage of the :money you buy. Your amount is unchanged.',
+    'optional' => 'optional',
     'login' => 'Log in to enter a creator code.',
     'errors' => [
         'invalid' => 'Invalid or inactive creator code.',
