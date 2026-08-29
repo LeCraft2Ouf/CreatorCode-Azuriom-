@@ -8,16 +8,19 @@
 
 [data-creatorcodes-box] .creatorcodes-row {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
     gap: 0.5rem;
-    max-width: 22rem;
+    width: min(100%, 28rem);
 }
 
 [data-creatorcodes-box] .creatorcodes-row .form-control {
     flex: 1 1 auto;
     min-width: 0;
-    width: auto;
+}
+
+[data-creatorcodes-box] .creatorcodes-row .btn {
+    flex: 0 0 auto;
 }
 
 [data-creatorcodes-box] .form-control:disabled {
